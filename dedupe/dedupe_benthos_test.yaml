@@ -1,0 +1,9 @@
+tests:
+  - name: "benthos_test_dedupe"
+    target_processors: "/pipeline/processors"
+    environment: {}
+    input_batch:
+      - file_content: "./dups.json"
+    output_batches:
+      -
+        - json_equals: '{"firstName": "Foo","lastName": "Bar","age": 100}'
