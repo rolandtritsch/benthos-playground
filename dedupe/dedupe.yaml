@@ -1,5 +1,4 @@
 input:
-  label: "input_read_json_files"
   file:
     paths: ["./*.json"]
     codec: "lines"
@@ -17,49 +16,14 @@ cache_resources:
 pipeline:
   threads: -1
   processors:
-    - label: "process_dedupe"
-      dedupe:
+    - dedupe:
         cache: "input_dedupe"
         key: ${! content().hash("xxhash64") }
         drop_on_err: true
 
 output:
-  label: "output_json_stdout"
   stdout:
     codec: "lines"
 
 logger:
   level: "WARN"
-  format: "logfmt"
-  add_timestamp: false
-  timestamp_name: "time"
-  message_name: "msg"
-  static_fields:
-    "@service": "benthos"
-  file:
-    path: ""
-    rotate: false
-    rotate_max_age_days: 0
-
-metrics:
-  prometheus:
-    use_histogram_timing: false
-    histogram_buckets: []
-    add_process_metrics: false
-    add_go_metrics: false
-    push_url: ""
-    push_interval: ""
-    push_job_name: "benthos_push"
-    push_basic_auth:
-      username: ""
-      password: ""
-    file_output_path: ""
-  mapping: ""
-
-tracer:
-  none: {}
-
-shutdown_delay: ""
-
-shutdown_timeout: 20s
-
