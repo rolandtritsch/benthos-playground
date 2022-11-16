@@ -1,0 +1,13 @@
+tests:
+  - name: "benthos_test_mapping"
+    target_processors: "/pipeline/processors"
+    environment: {}
+    input_batch:
+      - content: '{"firstName": "Foo","lastName": "Bar","age": 100}'
+      - content: '{"firstName": "Foo","lastName": "Bar","age": 100}'
+      - content: '{"firstName": "F00","lastName": "Bar","age": 100}'
+    output_batches:
+      -
+        - json_equals: '{"name": "FooBar"}'
+        - json_equals: '{"name": "FooBar"}'
+        - json_equals: '{"name": "F00Bar"}'
