@@ -1,0 +1,14 @@
+jobs:
+    test:
+        name: test all pipelines
+        runs-on: ubuntu-latest
+        steps:
+          - name: check out the repo
+            uses: actions/checkout@v2
+          - name: run the all the tests using the docker image
+            uses: addnab/docker-run-action@v3
+            with:
+                image: jeffail/benthos:latest
+                run: |
+                    lint ./...
+                    test ./...
