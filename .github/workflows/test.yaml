@@ -1,3 +1,11 @@
+name: Benthos Playground
+
+on:
+  pull_request:
+  push:
+    branches:
+    - trunk
+
 jobs:
     test:
         name: test all pipelines
