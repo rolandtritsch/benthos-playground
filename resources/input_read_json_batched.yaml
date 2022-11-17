@@ -1,0 +1,12 @@
+input_resources:
+  - label: "input_read_json_batched"
+    broker:
+      inputs:
+        - file:
+            paths: ["./data/*.json"]
+            codec: "lines"
+            max_buffer: 1000000
+            delete_on_finish: false
+      batching:
+        count: 10
+        period: 60s
