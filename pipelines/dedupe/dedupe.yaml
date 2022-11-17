@@ -1,5 +1,5 @@
 input:
-  resources: "input_read_json"
+  resource: "input_read_json"
 
 buffer:
   none: {}
