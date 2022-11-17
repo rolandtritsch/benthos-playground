@@ -1,4 +1,4 @@
-name: Benthos Playground
+name: Benthos Playground Test(s)
 
 on:
   pull_request:
@@ -8,15 +8,17 @@ on:
 
 jobs:
     test:
-        name: test all pipelines
+        name: Test all pipelines
         runs-on: ubuntu-latest
         steps:
-          - name: check out the repo
+          - name: Check out the repo
             uses: actions/checkout@v2
-          - name: run the all the tests using the docker image
+          - name: Run the all the tests using the docker image
             uses: addnab/docker-run-action@v3
             with:
                 image: jeffail/benthos:latest
+                options: --rm --volume ./benthos-playground:/benthos-playground 
                 run: |
-                    lint ./...
-                    test ./...
+                    lint /benthos-playground/resources/...
+                    lint /benthos-playground/pipelines/...
+                    test /benthos-playground/pipelines/...
