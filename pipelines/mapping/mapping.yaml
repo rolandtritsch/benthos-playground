@@ -1,5 +1,5 @@
 input:
-  resource: "input_read_json"
+  resource: "read_json"
 
 buffer:
   none: {}
@@ -8,11 +8,10 @@ pipeline:
   threads: -1
   processors:
     - mapping: |
-        root.name = this.firstName + this.lastName
+        root.name = this.firstName + ":" + this.lastName
 
 output:
-  stdout:
-    codec: "lines"
+  resource: "write_stdout"
 
 logger:
-  level: "WARN"
+  level: "INFO"

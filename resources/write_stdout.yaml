@@ -1,0 +1,4 @@
+output_resources:
+  - label: "write_stdout"
+    stdout:
+      codec: "lines"
