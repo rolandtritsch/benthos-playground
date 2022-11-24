@@ -1,0 +1,30 @@
+input:
+  broker:
+    inputs:
+      - resource: "read_json"
+      - resource: "read_json_protobuf"
+      - resource: "read_json_protobuf_base64"
+
+buffer:
+  none: {}
+
+cache_resources:
+  - label: "input_dedupe"
+    memory:
+      default_ttl: "60s"
+
+pipeline:
+  threads: -1
+  processors:
+    - dedupe:
+        cache: "input_dedupe"
+        key: "${! json().firstName }_${! json().lastName }_${! json().age }"
+        drop_on_err: true
+
+output:
+  resource: "write_stdout"
+
+logger:
+  level: "WARN"
+
+shutdown_delay: "1s"
