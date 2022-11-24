@@ -1,7 +1,0 @@
-input_resources:
-  - label: "input_read_json"
-    file:
-      paths: ["./data/*.json"]
-      codec: "lines"
-      max_buffer: 1000000
-      delete_on_finish: false

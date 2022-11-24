@@ -1,0 +1,12 @@
+input_resources:
+  - label: "read_json_protobuf"
+    file:
+      paths: ["./data/john.protob"]
+      codec: "all-bytes"
+      max_buffer: 1000000
+      delete_on_finish: false
+    processors:
+      - protobuf:
+          operator: "to_json"
+          message: "Person"
+          import_paths: ["./data"]

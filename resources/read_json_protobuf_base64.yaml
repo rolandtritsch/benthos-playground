@@ -1,11 +1,13 @@
 input_resources:
-  - label: "input_read_json_protobuf"
+  - label: "read_json_protobuf_base64"
     file:
-      paths: ["./data/john.protob"]
+      paths: ["./data/john.protob.base64"]
       codec: "all-bytes"
       max_buffer: 1000000
       delete_on_finish: false
     processors:
+      - mapping: |
+          root = content().decode("base64")
       - protobuf:
           operator: "to_json"
           message: "Person"

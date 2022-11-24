@@ -1,5 +1,9 @@
 input:
-  resource: "read_json"
+  broker:
+    inputs:
+      - resource: "read_json"
+      - resource: "read_json_protobuf"
+      - resource: "read_json_protobuf_base64"
 
 buffer:
   none: {}
@@ -8,10 +12,12 @@ pipeline:
   threads: -1
   processors:
     - mapping: |
-        root.name = this.firstName + ":" + this.lastName
+        root.name = this.firstName + " " + this.lastName
 
 output:
   resource: "write_stdout"
 
 logger:
-  level: "INFO"
+  level: "WARN"
+
+shutdown_delay: "1s"

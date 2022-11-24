@@ -9,4 +9,4 @@ input_resources:
             delete_on_finish: false
       batching:
         count: 10
-        period: 60s
+        period: 1s

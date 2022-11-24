@@ -8,6 +8,6 @@ tests:
       - content: '{"firstName": "F00","lastName": "Bar","age": 100}'
     output_batches:
       -
-        - json_equals: '{"name": "Foo:Bar"}'
-        - json_equals: '{"name": "Foo:Bar"}'
-        - json_equals: '{"name": "F00:Bar"}'
+        - json_equals: '{"name": "Foo Bar"}'
+        - json_equals: '{"name": "Foo Bar"}'
+        - json_equals: '{"name": "F00 Bar"}'

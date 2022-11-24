@@ -1,5 +1,5 @@
 input:
-  resource: "input_read_json_batched"
+  resource: "read_json_batched"
 
 buffer:
   none: {}
@@ -11,8 +11,10 @@ pipeline:
         root = this
 
 output:
+  resource: "write_stdout"
+
   stdout:
     codec: "lines"
 
 logger:
-  level: "WARN"
+  level: "INFO"
