@@ -18,7 +18,7 @@ pipeline:
   processors:
     - dedupe:
         cache: "input_dedupe"
-        key: "${! json().firstName }_${! json().lastName }_${! json().age }"
+        key: ${! content().hash("xxhash64") }
         drop_on_err: true
 
 output:
