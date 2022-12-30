@@ -12,7 +12,7 @@ To make this work you need to ...
 Stuff to see ...
 
 * `mapping` - do a simple mapping
-  * and also show how to read json, protobuf and base64 encoded files
+  * And also show how to read json, protobuf and base64 encoded files
 * `dedupe` - do a simple dedupe
   * Note: Because we read directly from json files AND we are
     converting from protobuf AND we are using `content().hash()` as a
@@ -25,5 +25,12 @@ Stuff to see ...
 * `group_by` - do a simple group_by
   * Note: You need to batch the input batches into one batch to
     make the group_by work
+* `window` - shows how batching by `system_window` works
+  * Use `./pipelines/window/run.sh` to run this
+  * Note: All events that are more than (60+30) 90 secs in the past
+    (from the current time) will get ignored
+  * Note: All events that are in the future will get ignored
+  * Note: The batching happens on absolute minute boundaries (0-59),
+    not on relative (to when benthos started) boundaries (e.g. 30-29)
 
 [benthos]: https://benthos.dev

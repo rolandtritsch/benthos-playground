@@ -1,0 +1,32 @@
+input:
+  broker:
+    inputs:
+      - resource: "read_json"
+      - resource: "read_json_protobuf"
+      - resource: "read_json_protobuf_base64"
+      - stdin:
+          codec: lines
+  processors:
+    - mapping: |
+        root = this
+        root.received_at = now() 
+
+buffer:
+  system_window:
+    timestamp_mapping: root = this.received_at
+    size: 1m
+    allowed_lateness: 30s
+
+pipeline:
+  threads: -1
+  processors:
+    - group_by_value:
+        value: ${! json().firstName }
+
+output:
+  resource: "write_stdout"
+
+logger:
+  level: "WARN"
+
+shutdown_delay: "1s"

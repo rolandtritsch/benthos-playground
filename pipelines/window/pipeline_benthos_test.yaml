@@ -1,0 +1,20 @@
+tests:
+  - name: "benthos_test_window"
+    target_processors: "/pipeline/processors"
+    input_batch:
+      - content: '{"firstName": "Foo","lastName": "Bar","age": 100}'
+      - content: '{"firstName": "Foo","lastName": "Bar","age": 101}'
+      - content: '{"firstName": "F00","lastName": "Bar","age": 100}'
+      - content: '{"firstName": "John","lastName": "Doe","age": 100}'
+      - content: '{"firstName": "John","lastName": "Doe","age": 101}'
+      - content: '{"firstName": "John","lastName": "Doe","age": 102}'
+    output_batches:
+      - 
+        - json_equals: '{"firstName": "Foo","lastName": "Bar","age": 100}'
+        - json_equals: '{"firstName": "Foo","lastName": "Bar","age": 101}'
+      -
+        - json_equals: '{"firstName": "F00","lastName": "Bar","age": 100}'
+      - 
+        - json_equals: '{"firstName": "John","lastName": "Doe","age": 100}'
+        - json_equals: '{"firstName": "John","lastName": "Doe","age": 101}'
+        - json_equals: '{"firstName": "John","lastName": "Doe","age": 102}'
